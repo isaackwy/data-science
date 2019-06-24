@@ -9,6 +9,7 @@ server <- function(input, output) {
   # Number of Tweets Per Day
   output$TweetFreq <- renderPlot({
     
+    # Load tweets from Jan 2019 to present	  
     load("TrumpTweets2019.RData")
     Drumpf <- TrumpTweets2019[1:2422,]
     
