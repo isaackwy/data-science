@@ -102,7 +102,6 @@ server <- function(input, output) {
      
      # Keyword frequency
      if (input$keyword == "Collusion"){
-        # Include both tweets and quote retweets
         subset1 <- Drumpf %>% 
           filter(str_detect(text, fixed("collusion", ignore_case=TRUE)))
         
@@ -139,7 +138,6 @@ server <- function(input, output) {
         else {Collusion}
      }
      else if (input$keyword == "Fake News"){
-        # Include both tweets and quote retweets
         subset2 <- Drumpf %>% 
            filter(str_detect(text, fixed("fake news", ignore_case=TRUE))) 
 
@@ -174,7 +172,6 @@ server <- function(input, output) {
         else {FakeNews}
      }    
      else if (input$keyword == "Mueller"){
-        # Include both tweets and quote retweets
         subset3 <- Drumpf %>% 
            filter(str_detect(text, fixed("mueller", ignore_case=TRUE)))
         
@@ -209,7 +206,6 @@ server <- function(input, output) {
         else {Mueller}
      }
      else if (input$keyword == "Witch Hunt"){
-       # Include both tweets and quote retweets
        subset4 <- Drumpf %>% 
          filter(str_detect(text, fixed("witch hunt", ignore_case=TRUE)))
        
