@@ -39,11 +39,14 @@ ui <- fluidPage(
                  
                  tabPanel("About", 
                           htmlOutput("Name"),
-                          tags$a(href = "https://www.linkedin.com/in/isaac-yu-430a3314b/", 
-                                 "Linkedin", target = "_blank"),
-                          br(),
+                          htmlOutput("About"),
                           tags$img(src='Shiny_Photo.png', align ='center'),
-                          htmlOutput("About")
+			  br(),
+                          tags$a(href = "https://github.com/isaackwy",
+                                 "Github", target = "_blank"),
+			  br(),
+                          tags$a(href = "https://www.linkedin.com/in/isaac-yu-430a3314b/", 
+                                 "Linkedin", target = "_blank")
                           )
    ))
   )
