@@ -40,6 +40,7 @@ ui <- fluidPage(
                  tabPanel("About", 
                           htmlOutput("Name"),
                           htmlOutput("About"),
+			  br(),
                           tags$img(src='Shiny_Photo.png', align ='center'),
 			  br(),
                           tags$a(href = "https://github.com/isaackwy",
