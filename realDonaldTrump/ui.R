@@ -32,7 +32,7 @@ ui <- fluidPage(
                 
                  tabPanel("Keywords per Day",
                           selectInput(inputId = "keyword", label = strong("Keyword:"),
-                                      choices = c("Collusion","Fake News","Mueller","Witch Hunt"),
+                                      choices = c("Collusion","Mueller","Russia","Witch Hunt"),
                                       selected = "Collusion"),
                           plotOutput("KeywordFreq"),
 			                    htmlOutput("KeywordDesc")), 
@@ -40,12 +40,12 @@ ui <- fluidPage(
                  tabPanel("About", 
                           htmlOutput("Name"),
                           htmlOutput("About"),
-			  br(),
+			                    br(),
                           tags$img(src='Shiny_Photo.png', align ='center'),
-			  br(),
+			                    br(),
                           tags$a(href = "https://github.com/isaackwy",
                                  "Github", target = "_blank"),
-			  br(),
+			                    br(),
                           tags$a(href = "https://www.linkedin.com/in/isaac-yu-430a3314b/", 
                                  "Linkedin", target = "_blank")
                           )

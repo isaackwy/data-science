@@ -9,7 +9,7 @@ server <- function(input, output) {
   # Number of Tweets Per Day
   output$TweetFreq <- renderPlot({
     
-    # Load tweets from Jan 2019 to present	  
+    # Load tweets from Jan 2019 to present
     load("TrumpTweets2019.RData")
     Drumpf <- TrumpTweets2019[1:2422,]
     
@@ -137,46 +137,12 @@ server <- function(input, output) {
         else if (input$mean) {Collusion + geom_hline(yintercept = mean(DailyTweets2$Freq), linetype="dashed", colour="red")}
         else {Collusion}
      }
-     else if (input$keyword == "Fake News"){
-        subset2 <- Drumpf %>% 
-           filter(str_detect(text, fixed("fake news", ignore_case=TRUE))) 
-
-        # Tweets per day. Prepare to merge with missing data.
-        Day <- format(subset2$created_at, "%Y-%m-%d")
-        DailyTweets <- as.data.frame(table(Day))
-        DailyTweets$Day <- as.Date(DailyTweets$Day)
-        
-        # Prepare to fill in missing data in a time series.
-        TweetDays <- seq(as.Date("2019-01-01"), as.Date("2019-05-31"), "days")    
-        TweetDays <- as.data.frame(TweetDays)
-        colnames(TweetDays) <- "Day"
-
-        # Merge the tweet, quoted retweet and missing data dataset.
-        # Change the missing values to 0.
-        DailyTweets2 <- full_join(TweetDays, DailyTweets, by="Day") %>%
-          mutate(Freq = replace_na(Freq, 0))
-        
-        # Make the ggplot
-        FakeNews <- ggplot(DailyTweets2, aes(x = Day, y = Freq)) + geom_line() + 
-        theme(axis.text.x = element_text(angle = 90)) + 
-        xlab("Date") + ylab("Number of Tweets") +
-        scale_x_date(date_labels = '%b %d', expand = c(0,0)) +
-        scale_y_discrete(limits = seq(0,6,1)) +
-        ggtitle("Number of Tweets Per Day")
-        
-        if (input$smoother & input$mean) {FakeNews + 
-            geom_smooth(se = FALSE, span = input$f) +
-            geom_hline(yintercept = mean(DailyTweets2$Freq), linetype="dashed", colour="red")}
-        else if (input$smoother) {FakeNews + geom_smooth(se = FALSE, span = input$f)}
-        else if (input$mean) {FakeNews + geom_hline(yintercept = mean(DailyTweets2$Freq), linetype="dashed", colour="red")}
-        else {FakeNews}
-     }    
      else if (input$keyword == "Mueller"){
-        subset3 <- Drumpf %>% 
+        subset2 <- Drumpf %>% 
            filter(str_detect(text, fixed("mueller", ignore_case=TRUE)))
         
         # Tweets per day. Prepare to merge with missing data.
-        Day <- format(subset3$created_at, "%Y-%m-%d")
+        Day <- format(subset2$created_at, "%Y-%m-%d")
         DailyTweets <- as.data.frame(table(Day))
         DailyTweets$Day <- as.Date(DailyTweets$Day)
         
@@ -205,6 +171,40 @@ server <- function(input, output) {
         else if (input$mean) {Mueller + geom_hline(yintercept = mean(DailyTweets2$Freq), linetype="dashed", colour="red")}
         else {Mueller}
      }
+     else if (input$keyword == "Russia"){
+       subset3 <- Drumpf %>% 
+         filter(str_detect(text, fixed("russia", ignore_case=TRUE))) 
+       
+       # Tweets per day. Prepare to merge with missing data.
+       Day <- format(subset3$created_at, "%Y-%m-%d")
+       DailyTweets <- as.data.frame(table(Day))
+       DailyTweets$Day <- as.Date(DailyTweets$Day)
+       
+       # Prepare to fill in missing data in a time series.
+       TweetDays <- seq(as.Date("2019-01-01"), as.Date("2019-05-31"), "days")    
+       TweetDays <- as.data.frame(TweetDays)
+       colnames(TweetDays) <- "Day"
+       
+       # Merge the tweet, quoted retweet and missing data dataset.
+       # Change the missing values to 0.
+       DailyTweets2 <- full_join(TweetDays, DailyTweets, by="Day") %>%
+         mutate(Freq = replace_na(Freq, 0))
+       
+       # Make the ggplot
+       Russia <- ggplot(DailyTweets2, aes(x = Day, y = Freq)) + geom_line() + 
+         theme(axis.text.x = element_text(angle = 90)) + 
+         xlab("Date") + ylab("Number of Tweets") +
+         scale_x_date(date_labels = '%b %d', expand = c(0,0)) +
+         scale_y_discrete(limits = seq(0,5,1)) +
+         ggtitle("Number of Tweets Per Day")
+       
+       if (input$smoother & input$mean) {Russia + 
+           geom_smooth(se = FALSE, span = input$f) +
+           geom_hline(yintercept = mean(DailyTweets2$Freq), linetype="dashed", colour="red")}
+       else if (input$smoother) {Russia + geom_smooth(se = FALSE, span = input$f)}
+       else if (input$mean) {Russia + geom_hline(yintercept = mean(DailyTweets2$Freq), linetype="dashed", colour="red")}
+       else {Russia}
+     }    
      else if (input$keyword == "Witch Hunt"){
        subset4 <- Drumpf %>% 
          filter(str_detect(text, fixed("witch hunt", ignore_case=TRUE)))
@@ -249,13 +249,13 @@ server <- function(input, output) {
   })
   
   output$KeywordDesc <- renderUI({
-    str3 <- paste0("From January 2019 - May 2019, Donald Trump said \"Collusion\" 140 times, \"Fake News\" 83 times,
-		   \"Mueller\" 124 times and \"Witch Hunt\" 44 times.", "</br>", "</br>",
+    str3 <- paste0("From January 2019 - May 2019, Donald Trump tweeted \"Collusion\" 140 times, \"Mueller\" 124 times,
+		   \"Russia\" 108 times and \"Witch Hunt\" 44 times.", "</br>", "</br>",
        "Notably,", "</br>",
-       "- On Apr 22, he tweeted \"Collusion\" 9 times and \"Mueller\" 11 times.", "</br>",
-       "- On May 11, he tweeted \"Collusion\" 10 times and \"Mueller\" 14 times.", "</br>",
-       "- On May 22, he tweeted \"Mueller\" 9 times and \"Witch Hunt\" 5 times.", "</br>",
-       "- He also tweeted \"Fake News\" 6 times on January 19.")
+       "- On Apr 22, he tweeted \"Collusion\" 9 times, \"Mueller\" 11 times and \"Russia\" 4 times.", "</br>",
+       "- In addition, on May 11, he tweeted \"Collusion\" 10 times, \"Mueller\" 14 times and \"Russia\" 5 times.", "</br>",
+       "- On May 12, he similarly tweeted \"Russia\" 5 times.", "</br>",
+       "- Furthermore, on May 22, he tweeted \"Mueller\" 9 times and \"Witch Hunt\" 5 times.", "</br>")
     HTML(paste(str3, sep = '<br/>'))
   })
   
@@ -269,7 +269,7 @@ server <- function(input, output) {
                    and a minor in statistics.", "</br>")
     str6 <- ("This Shiny App gathers tweets from \"Tweeter in Chief\" Donald Trump's account.  
           It displays the number of tweets per day over each month.  It also displays 
-          the frequency of certain key words, such as \"Collusion\", \"Fake News\", \"Mueller\" and \"Witch Hunt\".")
+          the frequency of certain key words, such as \"Collusion\", \"Mueller\", \"Russia\" and \"Witch Hunt\".")
     HTML(paste(str5, str6, sep = '<br/>'))
   })
 }
