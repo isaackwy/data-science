@@ -1,5 +1,5 @@
-The following RShiny app gathers tweets from Donald Trump's account.
-It displays daily tweet frequency and keyword frequency (Collusion, Witch Hunt, etc.):
+The following RShiny app gathers tweets from Donald Trump's and Bernie Sanders' accounts.
+It displays daily tweet frequency and keyword frequency (Economy, Jobs, etc.):
 https://shiny.rcg.sfu.ca/u/ikyu/realDonaldTrump/
 
-This folder contains the server.R and ui.R files.
+This folder contains the loadTweets.R, server.R and ui.R files.

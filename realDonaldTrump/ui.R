@@ -3,19 +3,15 @@ library(shiny)
 ui <- fluidPage(
   
   # Application title
-  titlePanel("Donald Trump 2019 Twitter Data"),
+  titlePanel("Politicians' 2019 Twitter Data"),
+  radioButtons("candidate", "",
+               c("Donald Trump" = "Drumpf",
+                 "Bernie Sanders" = "Birdie")),
     
   sidebarLayout(
     sidebarPanel(
       
-      # Smooth Line
-      checkboxInput("smoother", strong("Add smooth trend line?"), FALSE),
-      conditionalPanel(condition = "input.smoother == true",
-                       sliderInput(inputId = "f", label = "Smoother span:",
-                                   min = 0.20, max = 2, value = 0.75, step = 0.01,
-                                   animate = animationOptions(interval = 100)),
-                       HTML("Higher values give more smoothness.")
-      ),
+      # Horizontal Average Line
       checkboxInput("mean", strong("Add horizontal average line?"), FALSE)
     ),
   
@@ -32,8 +28,8 @@ ui <- fluidPage(
                 
                  tabPanel("Keywords per Day",
                           selectInput(inputId = "keyword", label = strong("Keyword:"),
-                                      choices = c("Collusion","Mueller","Russia","Witch Hunt"),
-                                      selected = "Collusion"),
+                                      choices = c("Economy","Jobs"),
+                                      selected = "Economy"),
                           plotOutput("KeywordFreq"),
 			                    htmlOutput("KeywordDesc")), 
                  
