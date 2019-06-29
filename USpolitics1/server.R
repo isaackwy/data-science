@@ -62,7 +62,8 @@ server <- function(input, output) {
         theme(axis.text.x = element_text(angle = 90)) + 
         scale_x_date(breaks = '1 day', date_labels = '%b %d', expand = c(0,0)) +
         xlab("Date") + ylab("Number of Tweets") + ggtitle("Number of Tweets Per Day")
-    
+
+    # Fix the y-axis   
     # If Donald Trump tweets are selected
     if (exists("Drumpf2019")) {
       Janplot <- Janplot + scale_y_discrete(limits = seq(0,25,5), expand = expand_scale(add = 0))
