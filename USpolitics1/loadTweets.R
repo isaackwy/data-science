@@ -1,6 +1,6 @@
 library(rtweet)
 
-# Connect to API. Keys not in repo.
+# Connect to API. Keys not uploaded to github.
 source('connect_to_twitter.R')
 
 Drumpf2019 <- get_timeline("realDonaldTrump", n = 3200)
