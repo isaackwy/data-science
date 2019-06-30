@@ -3,7 +3,7 @@ library(shiny)
 ui <- fluidPage(
   
   # Application title
-  titlePanel("Politicians' 2019 Twitter Data"),
+  titlePanel("Trump vs Sanders: 2019 Twitter Data"),
   radioButtons("candidate", "",
                c("Donald Trump" = "Drumpf",
                  "Bernie Sanders" = "Birdie")),
@@ -19,16 +19,14 @@ ui <- fluidPage(
     mainPanel(
       tabsetPanel(type = "tabs",
                  tabPanel("Tweets per Day", 
-                          selectInput(inputId = "month", label = strong("Month:"),
-                                      choices = c("January","February","March","April",
-                                                  "May"),
-                                      selected = "January"),
+                          sliderInput("month", "Month:", value = as.Date("2019-01-01"), 
+                                    min = as.Date("2019-01-01"), max = as.Date("2019-05-01"), timeFormat = "%b %Y"),
                           plotOutput("TweetFreq"),
                           htmlOutput("TweetDesc")),
                 
                  tabPanel("Keywords per Day",
                           selectInput(inputId = "keyword", label = strong("Keyword:"),
-                                      choices = c("Economy","Jobs"),
+                                      choices = c("Economy","Economic","Jobs","Justice","Trade"),
                                       selected = "Economy"),
                           plotOutput("KeywordFreq"),
 			                    htmlOutput("KeywordDesc")), 
