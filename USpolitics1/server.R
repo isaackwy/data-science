@@ -239,22 +239,23 @@ server <- function(input, output) {
                    and \"Trade\" 51 times.")
     str2 <- paste0("By contrast, Bernie Sanders tweeted \"Economy\" 35 times,
                    \"Economic\" 57 times, \"Jobs\" 53 times, \"Justice\" 92 times
-                   and \"Trade\" 26 times. Sanders notably tweeted \"Economic\" 33 times
-                   in June. In particular, he tweeted \"Economic\" 12 times on June 12.")
-    HTML(paste(str1, str2, sep = '</br></br>'))
+                   and \"Trade\" 26 times.")
+    str3 <- paste0("Sanders notably tweeted \"Economic\" 33 times in June.
+                   In particular, he tweeted \"Economic\" 12 times on June 12.")
+    HTML(paste(str1, str2, str3, sep = '</br></br>'))
   })
   
   output$Name <- renderUI({
-    str3 <- paste0("Author: ", "<b>", "Isaac Yu", "</b>", "</br>")
-    HTML(paste(str3, sep = '<br/>'))
+    str4 <- paste0("Author: ", "<b>", "Isaac Yu", "</b>", "</br>")
+    HTML(paste(str4, sep = '<br/>'))
   })
   
   output$About <- renderUI({
-    str4 <- paste0("</br>", "I graduated from Simon Fraser University with a major in sociology 
+    str5 <- paste0("</br>", "I graduated from Simon Fraser University with a major in sociology 
                    and a minor in statistics.", "</br>")
-    str5 <- ("This Shiny App gathers compares tweets from Donald Trump and Bernie Sanders' accounts.  
+    str6 <- ("This Shiny App gathers compares tweets from Donald Trump and Bernie Sanders' accounts.  
           It displays the number of tweets per day over each month.  It also displays 
           the frequency of certain key words, such as \"Economy\".")
-    HTML(paste(str4, str5, sep = '<br/>'))
+    HTML(paste(str5, str6, sep = '<br/>'))
   })
 }
