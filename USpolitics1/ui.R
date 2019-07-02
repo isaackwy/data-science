@@ -5,8 +5,8 @@ ui <- fluidPage(
   # Application title
   titlePanel("Trump vs Sanders: 2019 Twitter Data"),
   radioButtons("candidate", "",
-               c("Donald Trump" = "Drumpf",
-                 "Bernie Sanders" = "Birdie")),
+               c("Donald Trump" = "Trump",
+                 "Bernie Sanders" = "Sanders")),
     
   sidebarLayout(
     sidebarPanel(
@@ -20,9 +20,9 @@ ui <- fluidPage(
       tabsetPanel(type = "tabs",
                  tabPanel("Tweets per Day", 
                           sliderInput("month", "Month:", value = as.Date("2019-01-01"), 
-                                    min = as.Date("2019-01-01"), max = as.Date("2019-05-01"), timeFormat = "%b %Y"),
+                                    min = as.Date("2019-01-01"), max = as.Date("2019-06-30"), timeFormat = "%b %Y"),
                           plotOutput("TweetFreq"),
-                          htmlOutput("TweetDesc")),
+                          textOutput("TweetDesc")),
                 
                  tabPanel("Keywords per Day",
                           selectInput(inputId = "keyword", label = strong("Keyword:"),
