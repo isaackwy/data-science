@@ -239,8 +239,8 @@ server <- function(input, output) {
                    and \"Trade\" 51 times.")
     str2 <- paste0("By contrast, Bernie Sanders tweeted \"Economy\" 35 times,
                    \"Economic\" 57 times, \"Jobs\" 53 times, \"Justice\" 92 times
-                   and \"Trade\" 26 times. In particular, Bernie Sanders tweeted 
-                   \"Economic\" 12 times on June 12.")
+                   and \"Trade\" 26 times. Sanders notably tweeted \"Economic\" 33 times
+                   in June. In particular, he tweeted \"Economic\" 12 times on June 12.")
     HTML(paste(str1, str2, sep = '</br></br>'))
   })
   
