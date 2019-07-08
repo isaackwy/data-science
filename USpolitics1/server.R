@@ -18,18 +18,18 @@ server <- function(input, output) {
     # Tweets are from January 2019 to June 2019
     if(input$candidate == "Trump") {
       load("Trump2019.RData")
-      Tweets_df <- Trump2019[18:2535,]
+      tweet_df <- Trump2019[18:2535,]
     }
     else if(input$candidate == "Sanders") {
       load("Sanders2019.RData")
-      Tweets_df <- Sanders2019[7:1681,]
+      tweet_df <- Sanders2019[7:1681,]
     }
     else {
       break
     }
     
     # Tweets per day
-    Day <- format(Tweets_df$created_at, "%Y-%m-%d")
+    Day <- format(tweet_df$created_at, "%Y-%m-%d")
     DailyTweets <- as.data.frame(table(Day))
     DailyTweets$Day <- as.Date(DailyTweets$Day)
     
@@ -110,11 +110,11 @@ server <- function(input, output) {
     # Tweets are from January 2019 to June 2019
     if(input$candidate == "Trump") {
       load("Trump2019.RData")
-      Tweets_df <- Trump2019[18:2535,]
+      tweet_df <- Trump2019[18:2535,]
     }
     else if(input$candidate == "Sanders") {
       load("Sanders2019.RData")
-      Tweets_df <- Sanders2019[7:1681,]
+      tweet_df <- Sanders2019[7:1681,]
     }
     else {
       break
@@ -122,28 +122,30 @@ server <- function(input, output) {
     
     # Keyword frequency
     if (input$keyword == "Economy") {
-      tw_subset <- Tweets_df %>%
+      tweet_subset <- tweet_df %>%
         filter(str_detect(text, fixed("economy", ignore_case=TRUE)))
     }
     else if (input$keyword == "Economic") {
-      tw_subset <- Tweets_df %>%
-        filter(str_detect(text, fixed("economic", ignore_case=TRUE)))
+      # Ignore the word "economics"
+      tweet_subset <- tweet_df %>%
+        filter(str_detect(text, fixed("economic", ignore_case=TRUE))) %>%
+        filter(!str_detect(text, fixed("economics", ignore_case=TRUE)))
     }    
     else if (input$keyword == "Jobs") {
-      tw_subset <- Tweets_df %>% 
+      tweet_subset <- tweet_df %>% 
         filter(str_detect(text, fixed("jobs", ignore_case=TRUE)))
     }
     else if (input$keyword == "Justice") {
-      tw_subset <- Tweets_df %>% 
+      tweet_subset <- tweet_df %>% 
         filter(str_detect(text, fixed("justice", ignore_case=TRUE)))
     }
     else if (input$keyword == "Trade") {
-      tw_subset <- Tweets_df %>% 
+      tweet_subset <- tweet_df %>% 
         filter(str_detect(text, fixed("trade", ignore_case=TRUE)))
     }
     
     # Tweets per day. Prepare to merge with missing data.
-    Day <- format(tw_subset$created_at, "%Y-%m-%d")
+    Day <- format(tweet_subset$created_at, "%Y-%m-%d")
     DailyTweets <- as.data.frame(table(Day))
     DailyTweets$Day <- as.Date(DailyTweets$Day)
     
