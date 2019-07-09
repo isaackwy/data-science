@@ -143,6 +143,11 @@ server <- function(input, output) {
       tweet_subset <- tweet_df %>% 
         filter(str_detect(text, fixed("trade", ignore_case=TRUE)))
     }
+    else if (input$keyword == "Worker(s)") {
+      # Include both "worker" and "workers"
+      tweet_subset <- tweet_df %>% 
+        filter(str_detect(text, fixed("worker", ignore_case=TRUE)))
+    }
     
     # Tweets per day. Prepare to merge with missing data.
     Day <- format(tweet_subset$created_at, "%Y-%m-%d")
@@ -173,6 +178,9 @@ server <- function(input, output) {
         Keyword_plot <- Keyword_plot + scale_y_discrete(limits = seq(0,2,1), expand = expand_scale(add = 0.1))
       }
       else if (input$keyword == "Trade") {
+        Keyword_plot <- Keyword_plot + scale_y_discrete(limits = seq(0,2,1), expand = expand_scale(add = 0.1))
+      }
+      else if (input$keyword == "Worker(s)") {
         Keyword_plot <- Keyword_plot + scale_y_discrete(limits = seq(0,2,1), expand = expand_scale(add = 0.1))
       }
     }
@@ -237,13 +245,14 @@ server <- function(input, output) {
   
   output$KeywordDesc <- renderUI({
     str1 <- paste0("From January - June 2019, Donald Trump tweeted \"Economy\" 79 times,
-                   \"Economic\" 36 times, \"Jobs\" 54 times, \"Justice\" 25 times
-                   and \"Trade\" 51 times.")
+                   \"Economic\" 36 times, \"Jobs\" 54 times, \"Justice\" 25 times,
+                    \"Trade\" 51 times and \"Worker\" (including \"Workers\") 19 times.")
     str2 <- paste0("By contrast, Bernie Sanders tweeted \"Economy\" 35 times,
-                   \"Economic\" 57 times, \"Jobs\" 53 times, \"Justice\" 92 times
-                   and \"Trade\" 26 times.")
-    str3 <- paste0("Sanders notably tweeted \"Economic\" 33 times in June.
-                   In particular, he tweeted \"Economic\" 12 times on June 12.")
+                   \"Economic\" 57 times, \"Jobs\" 53 times, \"Justice\" 92 times,
+                   \"Trade\" 26 times and \"Worker(s)\" 166 times.")
+    str3 <- paste0("In June, Sanders tweeted \"Economic\" 33 times and \"Worker(s)\" 68 times.
+                   In particular, he tweeted \"Worker(s)\" 20 times on June 5
+                   and \"Economic\" 12 times on June 12.")
     HTML(paste(str1, str2, str3, sep = '</br></br>'))
   })
   

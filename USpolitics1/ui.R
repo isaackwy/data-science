@@ -26,7 +26,7 @@ ui <- fluidPage(
                 
                  tabPanel("Keywords per Day",
                           selectInput(inputId = "keyword", label = strong("Keyword:"),
-                                      choices = c("Economy","Economic","Jobs","Justice","Trade"),
+                                      choices = c("Economy","Economic","Jobs","Justice","Trade","Worker(s)"),
                                       selected = "Economy"),
                           plotOutput("KeywordFreq"),
 			                    htmlOutput("KeywordDesc")), 
