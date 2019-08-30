@@ -264,7 +264,7 @@ server <- function(input, output) {
   output$About <- renderUI({
     str5 <- paste0("</br>", "I graduated from Simon Fraser University with a major in sociology 
                    and a minor in statistics.", "</br>")
-    str6 <- ("This Shiny App gathers compares tweets from Donald Trump and Bernie Sanders' accounts.  
+    str6 <- ("This Shiny App compares tweets from Donald Trump and Bernie Sanders' accounts.  
           It displays the number of tweets per day over each month.  It also displays 
           the frequency of certain key words, such as \"Economy\".")
     HTML(paste(str5, str6, sep = '<br/>'))
