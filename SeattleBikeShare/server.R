@@ -124,7 +124,7 @@ server <- function(input, output) {
                    and a minor in statistics.", "</br>")
     str6 <- paste0("This Shiny App displays Seattle's Pronto Cycle Share data.
                    It shows the number of bike trips per hour over each day.
-                   It also shows the distribution of bike trips arriving at and leaving from stations.") 
+                   It also compares the number of trips leaving each station with the number of arrivals.") 
     HTML(paste(str5, str6, sep = '<br/>'))
   })
 }
