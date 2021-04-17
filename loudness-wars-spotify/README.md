@@ -26,7 +26,7 @@ A Jupyter Notebook, along with Spotify data files, are available here. The noteb
 
 ## Results<a name="results"></a>
 
-
+I have not written a post explaining my main findings yet.
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
