@@ -26,7 +26,7 @@ A Jupyter Notebook, along with Spotify data files, are available here. The noteb
 
 ## Results<a name="results"></a>
 
-I have not written a post explaining my main findings yet.
+I have written a post explaining my main findings yet [here](https://medium.com/@isaacyu1_96734/loudness-wars-spotify-song-analysis-d3f48bfe3ebe).
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
